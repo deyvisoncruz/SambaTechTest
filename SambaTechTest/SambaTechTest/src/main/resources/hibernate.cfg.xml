@@ -8,7 +8,7 @@
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">minex</property>
     <property name="hibernate.hbm2ddl.auto">create</property>
-    <mapping class="model.Base"/>
+    <mapping class="model.dao.HibernateDAO"/>
     <mapping class="model.User"/>
     <mapping class="model.Video"/>
   </session-factory>
