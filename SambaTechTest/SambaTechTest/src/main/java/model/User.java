@@ -34,10 +34,9 @@ public class User extends Base {
     private String login;
     @Column
     private String password;
-    @OneToMany(mappedBy = "User", fetch = FetchType.LAZY)
-    @ForeignKey(name = "Video")        
-    private List<Video> videos;
-   
+    /*@OneToMany(mappedBy = "mUser", fetch = FetchType.LAZY)
+    @ForeignKey(name = "VideoList")        
+    private List<Video> videos;*/
 
     public User(){
         super();        
@@ -66,14 +65,14 @@ public class User extends Base {
         this.password = password;
     }
     
-     public List<Video> getVideos() {
+    /* public List<Video> getVideos() {
         return videos;
     }
 
     public void setVideos(List<Video> videos) {
         this.videos = videos;
     }
-   
+   */
     public List ListItens() {
         SessionFactory sf =HibernateUtil.getSessionFactory();
         org.hibernate.Session session= sf.openSession();
