@@ -21,7 +21,7 @@ import javax.persistence.Transient;
  * 
  */
 @MappedSuperclass
-public  abstract class Base  {
+public  abstract class Base implements Serializable {
     
 
     @Id
@@ -40,11 +40,8 @@ public  abstract class Base  {
     //@CreationTimestamp
     protected Timestamp  Delete_at;
     
-    @Column
-    protected int User_id;
     
-    @Column
-    protected int Register_source_id;
+    
 
     
     
@@ -77,6 +74,7 @@ public  abstract class Base  {
 
     public void setDelete_at(Timestamp Delete_at) {
         this.Delete_at = Delete_at;
+        
     }
     
     /**
@@ -123,39 +121,4 @@ public  abstract class Base  {
         this.Update_at = update_at;
     }
 
-    /**
-     * @return the user_id
-     */
-    public int getUser_id() {
-        return User_id;
-    }
-
-    public String getUser()
-    {
-        User s = new User();
-        return s.ListFind(getUser_id()).getName();
-    }
-    /**
-     * @param user_id the user_id to set
-     */
-    public void setUser_id(int user_id) {
-        this.User_id = user_id;
-    }
-
-    /**
-     * @return the register_source_id
-     */
-    public int getRegister_source_id() {
-        return Register_source_id;
-    }
-
-    /**
-     * @param register_source_id the register_source_id to set
-     */
-    public void setRegister_source_id(int register_source_id) {
-        this.Register_source_id = register_source_id;
-    }
-    
-    
-    
 }

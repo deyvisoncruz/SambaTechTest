@@ -10,12 +10,15 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.annotations.ForeignKey;
 
 /**
  *
@@ -31,18 +34,10 @@ public class User extends Base {
     private String login;
     @Column
     private String password;
-    
-    /*@ManyToOne
-    @JoinColumn(name = "role_id")
-    private Roles role;
-
-    public Roles getRole() {
-        return role;
-    } 
-
-    public void setRole(Roles role) {
-        this.role = role;
-    }*/
+    @OneToMany(mappedBy = "User", fetch = FetchType.LAZY)
+    @ForeignKey(name = "Video")        
+    private List<Video> videos;
+   
 
     public User(){
         super();        
@@ -71,13 +66,19 @@ public class User extends Base {
         this.password = password;
     }
     
+     public List<Video> getVideos() {
+        return videos;
+    }
+
+    public void setVideos(List<Video> videos) {
+        this.videos = videos;
+    }
    
     public List ListItens() {
         SessionFactory sf =HibernateUtil.getSessionFactory();
         org.hibernate.Session session= sf.openSession();
         Criteria crit = session.createCriteria(User.class);
-        //Criteria prdCrit = crit.createCriteria("produtos");
-        //prdCrit.add(Restrictions.gt("preco",new Double(25.0)));
+        
         List results = crit.list();
     return results;
     }
