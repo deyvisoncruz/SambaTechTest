@@ -26,19 +26,19 @@ public  abstract class Base implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ")
-    protected int Id;
+    public int Id;
     
     @Column
     //@CreationTimestamp
-    protected Timestamp  Create_at;
+    public Timestamp  Create_at;
     
     @Column
     //@CreationTimestamp
-    protected Timestamp   Update_at;
+    public Timestamp   Update_at;
     
     @Column
     //@CreationTimestamp
-    protected Timestamp  Delete_at;
+    public Timestamp  Delete_at;
     
     
     

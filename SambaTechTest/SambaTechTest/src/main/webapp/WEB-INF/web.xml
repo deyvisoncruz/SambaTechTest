@@ -36,7 +36,7 @@
     </context-param>         
     
     <!-- Filtros do Spring  -->
-    <!-- Esta dando pau  - verificar
+    <!--
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
@@ -50,7 +50,7 @@
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-    --> 
+    -->
         <!-- Configurações do JavaServer Faces -->
     
     <context-param>
@@ -68,7 +68,7 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.faces</url-pattern>
     </servlet-mapping>
-    <!--
+    
     <security-constraint>
         <display-name>Bloqueia o browser de acessar arquivos xhtml</display-name>
         <web-resource-collection>
@@ -77,7 +77,7 @@
         </web-resource-collection>
         <auth-constraint/>
     </security-constraint>
-    -->
+    
     <!-- Configurações do PrimeFaces -->
     
     <servlet>

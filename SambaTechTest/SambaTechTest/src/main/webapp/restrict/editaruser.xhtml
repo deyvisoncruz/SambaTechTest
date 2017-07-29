@@ -16,8 +16,9 @@
                         <p:growl id="msg0"/>
                         <h:panelGrid columns="2" cellpadding="10" styleClass="panelGrid" id="grid0">
                             
-                           <h:outputLabel/>
-                           <h:inputHidden id="iduser" value="#{mbUser.user.id}"/> 
+                           #{mbUser.setUserForId(50)}
+                             <h:outputLabel/>
+                             <h:inputHidden id="iduser" value="#{mbUser.userId}"/> 
                             
                             <h:outputLabel for="nomeuser" value="Nome:"/>
                             <p:inputText id="nomeuser" size="40" value="#{mbUser.user.name}"
@@ -49,50 +50,6 @@
                     </h:form>
                 </p:tab>
             </p:tabView>
-            
-            <h:form id="formtable">
-                <p:growl id="msg1"/>
-                <p:dataTable id="idTabela" var="user" value="#{mbUser.users}"
-                             paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
-                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
-                             {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                             rowsPerPageTemplate="5,10,15"
-                             filteredValue="" >
-                
-                    <f:facet name="header">Lista de Usuários</f:facet>
-                     
-                    <p:column filterBy="#{user.name}">
-                        <f:facet name="header">
-                            <h:outputText value="Nome"/>
-                        </f:facet>
-                        <h:outputText value="#{user.name}"/>
-                    </p:column>
-                    <p:column filterBy="#{user.login}">
-                        <f:facet name="header">
-                            <h:outputText value="Login"/>
-                        </f:facet>
-                        <h:outputText value="#{user.login}"/>
-                    </p:column>
-                    <p:column>
-                        <f:facet name="header">
-                            <h:outputText value="Ações"/>
-                        </f:facet>
-                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
-                                process="@this" update=":tbv1:formUser">
-                            <f:setPropertyActionListener target="#{mbUser.user}"
-                                value="#{user}"/>
-                        </p:commandButton>
-                        <p:commandButton value="Remover" action="#{mbUser.deleteUser()}"
-                                image="ui-icon ui-icon-close" update="@form">
-                            <f:setPropertyActionListener target="#{mbUser.user}"
-                                value="#{user}"/>
-                        </p:commandButton>
-                        
-                    </p:column>
-                    
-                </p:dataTable>
-                
-            </h:form>
             
         </p:fieldset>
     </ui:define>

@@ -41,10 +41,10 @@ public class Video extends Base  {
     }
 
     
-    /*@ManyToOne(optional=false)
+    @ManyToOne(optional=false)
     @ForeignKey(name = "VideoUser") 
     @JoinColumn(name="User_Id", referencedColumnName = "Id")
-    private User user;*/
+    private User user;
     
     public String getName() {
         return name;
@@ -53,12 +53,12 @@ public class Video extends Base  {
     public void setName(String name) {
         this.name = name;
     }
-    /*
+    
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
-    }*/
+    }
 }

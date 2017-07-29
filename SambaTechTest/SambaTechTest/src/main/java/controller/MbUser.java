@@ -19,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.*;
 
 
 
@@ -30,13 +31,20 @@ public class MbUser implements Serializable  {
     
 
     private static final long serialVersionUID = 1L;
-    private User user = new User();
+    public User user = new User();
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     private List<User> users;
     public MbUser()
     {
-        
+       
     }
-    
+    public MbUser( int codid)
+    {
+        this.setUser(user.ListFind(codid));
+    }
     
     private InterfaceDAO<User> userDAO()
     {
@@ -59,19 +67,35 @@ public class MbUser implements Serializable  {
     }
     
      public String addUser() {
-       // if (/*user.getId() == null ||*/ user.getId() == 0)
-       // {
-          //  insertUser();
-       /* } else {
+        if (/*user.getId() == null ||*/ user.getId() == 0)
+        {
+            insertUser();
+        } else {
             updateUser();
-        }*/
+        }
         limpUser();
         return null;
     }
-    private void insertUser() {
-       userDAO().save(user);
-       FacesContext.getCurrentInstance().addMessage(null,
-               new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso", ""));
+    public void insertUser() {
+        int control =0;
+        for (User user1 : this.getUsers()) {
+            if (this.user.getLogin().equals(user1.getLogin()))
+            {
+                control =1;
+                break;
+            }
+        }
+        if (control ==0)
+        {
+            userDAO().save(user);
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso, este usuário já está apto a enviar videos!", ""));
+        }
+        else
+        {
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO, "Já existe usuário com este login, favor alterar!", ""));        
+        }
    }
    
     private void updateUser() {
@@ -95,4 +119,13 @@ public class MbUser implements Serializable  {
         return user;
     }
     
+    public int getUserId() {
+        return user.getId();
+    }
+    public String edit(){
+		return "editaruser";
+	}
+    public void  setUserForId(int x) {
+        this.user = user.ListFind(x);
+    }
 }

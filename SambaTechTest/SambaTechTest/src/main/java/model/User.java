@@ -7,10 +7,15 @@ package model;
 
 import Util.HibernateUtil;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -27,7 +32,27 @@ import org.hibernate.annotations.ForeignKey;
 @Entity
 @Table(name="User", schema="public")
 @SequenceGenerator(name="SEQ",sequenceName="SEQ_DB_NAME3")
-public class User extends Base {
+public class User implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator="SEQ")
+    public int Id;
+    
+    @Column
+    //@CreationTimestamp
+    public Timestamp  Create_at;
+    
+    @Column
+    //@CreationTimestamp
+    public Timestamp   Update_at;
+    
+    @Column
+    //@CreationTimestamp
+    public Timestamp  Delete_at;
+    
+    
+    private static final long serialVersionUID =  1L; 
+    
     @Column
     private String name;
     @Column
@@ -39,8 +64,75 @@ public class User extends Base {
     private List<Video> videos;*/
 
     public User(){
-        super();        
+              
     }
+    
+    public int getId() {
+        return this.Id;
+    }
+    
+    public Timestamp getDelete_at() {
+        return Delete_at;
+    }
+    
+    public String getDelete_atToString()
+    {
+        String aux ="";
+        if (Delete_at != null)
+            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getDelete_at()));
+        
+        return aux;
+    }
+
+    public void setDelete_at(Timestamp Delete_at) {
+        this.Delete_at = Delete_at;
+        
+    }
+    
+    /**
+     * @return the create_at
+     */
+    public Timestamp  getCreate_at() {
+        return Create_at;
+    }
+
+    public String getCreate_atToString()
+    {
+        String aux ="";
+        if (Create_at != null)
+            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getCreate_at()));
+        
+        return aux;
+    }
+    /**
+     * @param create_at the create_at to set
+     */
+    public void setCreate_at(Timestamp  create_at) {
+        this.Create_at = create_at;
+    }
+
+    /**
+     * @return the update_at
+     */
+    public Timestamp getUpdate_at() {
+        return Update_at;
+    }
+
+    public String getUpdate_atToString()
+    {
+        String aux ="";
+        if (Update_at != null)
+            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getUpdate_at()));
+        
+        return aux;
+    }
+    /**
+     * @param update_at the update_at to set
+     */
+    public void setUpdate_at(Timestamp update_at) {
+        this.Update_at = update_at;
+    }
+    
     public String getName() {
         return name;
     }
@@ -64,8 +156,9 @@ public class User extends Base {
     public void setPassword(String password) {
         this.password = password;
     }
-    @Override
-    public int getId() {
+ 
+      
+    public int IdEdit() {
         return this.Id;
     } 
     /* public List<Video> getVideos() {
@@ -97,6 +190,9 @@ public class User extends Base {
             }
         }
         return  aux;
+    }
+    public void setId(int Id) {
+        this.Id = Id;
     }
 }
 

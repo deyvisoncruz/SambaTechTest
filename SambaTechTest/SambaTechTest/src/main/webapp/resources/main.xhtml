@@ -19,20 +19,27 @@
         
         <div id="top">
             <ui:insert name="top">TubeLand - seu canal de videos</ui:insert>
+            
         </div>
+        <div id="topdown">
+             <ui:insert name="bottom">&nbsp;<a href="./home.faces"> Início</a>&nbsp;<a href="./login.faces"> Login</a>&nbsp;<a href="./register.faces"> Registrar</a>&nbsp;<a href="./cadastraruser.faces"> Admin</a></ui:insert>
+        </div>
+        
         <div id="content" class="center_content">
             <ui:insert name="right">Lista de Videos</ui:insert>
         </div>
+        
         <div id="content" class="center_content">
             <ui:insert name="left">left</ui:insert>
         </div>
+        
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
         
         <div id="bottom">
-            <ui:insert name="bottom"><a href="#"> Login</a><a href="./cadastraruser.faces"> Cadastrar</a><a href="./home.faces"> Início</a></ui:insert>
-        </div>
+             <ui:insert name="bottom"><a href="./home.faces"> Início</a><a href="./login.faces"> Login</a><a href="./cadastraruser.faces">Admin</a></ui:insert>
+             </div>
 
     </h:body>
     
