@@ -9,11 +9,15 @@ package controller;
  *
  * @author Deyvison
  */
+import Util.FacesContextUtil;
 import Util.SessionUtil;
 import java.io.Serializable;
-
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import model.User;
+import model.dao.HibernateDAO;
+import model.dao.InterfaceDAO;
 
 
 @RequestScoped
@@ -24,20 +28,40 @@ public class AutenticadorBean implements Serializable {
 
 	private String email;
 	private String senha;
-
+        private List<User> lu ;
+        private User logado = new User();
+        
+    
 	public String autentica() {
-		System.out.println("autentica..");
+		System.out.println("autentica...");
 			
-		if (email.equals("admin")&&senha.equals("admin")) {
+               lu = logado.ListItens();
+               for (User user : lu) {
+                if (email.equals(user.getLogin()))
+                {
+                      logado = user;     
+                      break;
+                }
+               }
+		if (email.equals(logado.getLogin())&&senha.equals(logado.getPassword()) || email.equals("admin")&&senha.equals("admin")){
 			System.out.println("Confirmou  usuario e senha ...");		
 			
 			//ADD USUARIO NA SESSION
 			
 			Object b = new Object();
-			
 			SessionUtil.setParam("USUARIOLogado", b);
-			
-		return "/Logado.xhtml?faces-redirect=true";
+                        if(email.equals("admin")&&senha.equals("admin"))
+                        {
+                            SessionUtil.setParam("USUARIONome", "Administrador");
+                            SessionUtil.setParam("USUARIOId", "10001");
+                        }
+                        else
+                        {
+                            SessionUtil.setParam("USUARIONome", logado.getName());
+                            SessionUtil.setParam("USUARIOId", logado.getId());
+                        }
+                        
+		return "./home.faces";
 
 		} else {
 			
@@ -57,7 +81,7 @@ public class AutenticadorBean implements Serializable {
 		//REMOVER USUARIO DA SESSION
 		
 		
-		return "/Login?faces-redirect=true";
+		return "./Login?faces-redirect=true";
 	}
 
 	// GETTERS E SETTERS

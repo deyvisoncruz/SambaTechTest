@@ -16,22 +16,18 @@
                         <p:growl id="msg0"/>
                         <h:panelGrid columns="2" cellpadding="10" styleClass="panelGrid" id="grid0">
                             
-                           <h:outputLabel/>
-                           <h:inputHidden id="iduser" value="#{mbUser.user.id}"/> 
-                            
-                           
                             <h:outputLabel for="loginuser" value="Login"/>
-                            <p:inputText id="loginuser" size="40" value="#{mbUser.user.login}"
+                            <p:inputText id="loginuser" size="40" value="#{autenticadorBean.email}"
                                 required="true"
                                 requiredMessage="O campo [Login] é obrigatório."/>
                             <h:outputLabel for="senhauser" value="Senha:"/>
-                            <p:inputText id="senhauser" size="40" value="#{mbUser.user.password}"
+                            <p:inputText id="senhauser" size="40" value="#{autenticadorBean.senha}"
                                 required="true"
                                 requiredMessage="O campo [Senha] é obrigatório."/>
                             
                             <p:panel>
                                 
-                                <p:commandButton value="Login"  action="fazer o login"
+                                <p:commandButton value="Login"  action="#{autenticadorBean.autentica()}"
                                   update="@form" ajax="false" />
                              
                                 
