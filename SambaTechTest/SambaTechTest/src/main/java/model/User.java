@@ -64,7 +64,10 @@ public class User extends Base {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+    @Override
+    public int getId() {
+        return this.Id;
+    } 
     /* public List<Video> getVideos() {
         return videos;
     }

@@ -23,6 +23,8 @@ import javax.faces.context.FacesContext;
 
 
 
+@ManagedBean(name = "mbUser")
+@RequestScoped
 
 public class MbUser implements Serializable  {
     
@@ -48,18 +50,21 @@ public class MbUser implements Serializable  {
         return editUser();
     }
      
+     public String test() {
+       return "testedsf";
+    }
     public String editUser()
     {
         return "/restrict/cadastraruser.faces";
     }
     
      public String addUser() {
-        if (user == null || user.getId() == 0)
-        {
-            insertUser();
-        } else {
+       // if (/*user.getId() == null ||*/ user.getId() == 0)
+       // {
+          //  insertUser();
+       /* } else {
             updateUser();
-        }
+        }*/
         limpUser();
         return null;
     }
