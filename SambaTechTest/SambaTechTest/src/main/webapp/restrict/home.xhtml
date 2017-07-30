@@ -12,32 +12,43 @@
         
     </ui:define>
     <ui:define name="content">
-         <h:form id="formtable">
+        
+            <h:form id="formtable">
                 <p:growl id="msg1"/>
-                <p:dataTable id="idTabela" var="bvideos" value="#{mbVideo.videos}"
+                <p:dataTable id="idTabela" var="videos" value="#{mbVideo.videos}"
                              paginator="true" rows="10" emptyMessage="Nenhum registro encontrado"
                              paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink}
                              {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                              rowsPerPageTemplate="5,10,15"
                              filteredValue="" >
                 
-                    <f:facet name="header">Lista de Videos</f:facet>
+                    <f:facet name="header">Lista de Vídeos</f:facet>
                      
-                    <p:column >
+                    <p:column filterBy="#{videos.name}">
                         <f:facet name="header">
                             <h:outputText value="Nome"/>
                         </f:facet>
-                        <h:outputText value="#{bvideos.name}"/>
+                        <h:outputText value="#{videos.name}"/>
                     </p:column>
-                    
+                    <p:column filterBy="#{videos.user_Name}">
+                        <f:facet name="header">
+                            <h:outputText value="Login"/>
+                        </f:facet>
+                        <h:outputText value="#{videos.user_Name}"/>
+                    </p:column>
                     <p:column>
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
-                        </f:facet>                        
-                        <p:commandButton value="Renderizar" 
+                        </f:facet>
+                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
+                                process="@this" >
+                            <f:setPropertyActionListener target="#{mbVideo.video}"
+                                value="#{videos}"/>
+                        </p:commandButton>
+                        <p:commandButton value="Remover" action="#{mbVideo.deleteUser}"
                                 image="ui-icon ui-icon-close" update="@form">
-                            <f:setPropertyActionListener target=""
-                                value=""/>
+                            <f:setPropertyActionListener target="#{mbVideo.limpVideo}"
+                                value="#{videos}"/>
                         </p:commandButton>
                         
                     </p:column>
@@ -45,6 +56,7 @@
                 </p:dataTable>
                 
             </h:form>
+            
     </ui:define>
 
    

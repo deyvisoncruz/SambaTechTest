@@ -118,7 +118,8 @@ public class MbVideo implements Serializable  {
     }
     
      public List<Video> getVideos() {
-        return videos;
+        videos = videoDAO().getEntities();
+         return videos;
     }
 
     public void setVideos(List<Video> videos) {

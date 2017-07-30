@@ -19,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -55,6 +56,26 @@ public class Video  implements Serializable {
     
     @Column
     private int user_id;   
+    @Transient
+    private String user_Name;
+
+    public String getUser_Name() {
+         User u = new User();
+            this.user_Name = u.ListFind(this.user_id).getName();    
+      return user_Name;
+    }
+
+    public void setUser_Name(String user_Name) {
+         if(this.getUser_id()>0 )
+       {
+            User u = new User();
+            this.user_Name = u.ListFind(this.getUser_id()).getName();    
+       }
+       else
+       {
+           this.user_Name = "Administrador";
+       }
+    }
 
     public int getUser_id() {
         User u = new User();
