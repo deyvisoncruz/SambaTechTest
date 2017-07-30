@@ -43,7 +43,7 @@ public class MbUser implements Serializable  {
     }
     public MbUser( int codid)
     {
-        this.setUser(user.ListFind(codid));
+        
     }
     
     private InterfaceDAO<User> userDAO()

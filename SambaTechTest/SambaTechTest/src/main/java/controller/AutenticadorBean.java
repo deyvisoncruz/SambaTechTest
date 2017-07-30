@@ -13,8 +13,10 @@ import Util.FacesContextUtil;
 import Util.SessionUtil;
 import java.io.Serializable;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 import model.User;
 import model.dao.HibernateDAO;
 import model.dao.InterfaceDAO;
@@ -60,11 +62,14 @@ public class AutenticadorBean implements Serializable {
                             SessionUtil.setParam("USUARIONome", logado.getName());
                             SessionUtil.setParam("USUARIOId", logado.getId());
                         }
-                        
+                FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO, "Login Realizado com sucesso!", ""));
+     
 		return "./home.faces";
 
 		} else {
-			
+			FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO, "Falha ao realizar login, verifique seu usuário e sua senha e tente novamente.", ""));
 			return null;
 
 		}

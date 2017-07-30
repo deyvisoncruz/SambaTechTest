@@ -42,13 +42,7 @@ public class User implements Serializable {
     //@CreationTimestamp
     public Timestamp  Create_at;
     
-    @Column
-    //@CreationTimestamp
-    public Timestamp   Update_at;
     
-    @Column
-    //@CreationTimestamp
-    public Timestamp  Delete_at;
     
     
     private static final long serialVersionUID =  1L; 
@@ -59,9 +53,7 @@ public class User implements Serializable {
     private String login;
     @Column
     private String password;
-    /*@OneToMany(mappedBy = "mUser", fetch = FetchType.LAZY)
-    @ForeignKey(name = "VideoList")        
-    private List<Video> videos;*/
+   
 
     public User(){
               
@@ -71,39 +63,8 @@ public class User implements Serializable {
         return this.Id;
     }
     
-    public Timestamp getDelete_at() {
-        return Delete_at;
-    }
     
-    public String getDelete_atToString()
-    {
-        String aux ="";
-        if (Delete_at != null)
-            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getDelete_at()));
-        
-        return aux;
-    }
-
-    public void setDelete_at(Timestamp Delete_at) {
-        this.Delete_at = Delete_at;
-        
-    }
     
-    /**
-     * @return the create_at
-     */
-    public Timestamp  getCreate_at() {
-        return Create_at;
-    }
-
-    public String getCreate_atToString()
-    {
-        String aux ="";
-        if (Create_at != null)
-            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getCreate_at()));
-        
-        return aux;
-    }
     /**
      * @param create_at the create_at to set
      */
@@ -111,27 +72,9 @@ public class User implements Serializable {
         this.Create_at = create_at;
     }
 
-    /**
-     * @return the update_at
-     */
-    public Timestamp getUpdate_at() {
-        return Update_at;
-    }
+    
 
-    public String getUpdate_atToString()
-    {
-        String aux ="";
-        if (Update_at != null)
-            aux = (String) (new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(this.getUpdate_at()));
-        
-        return aux;
-    }
-    /**
-     * @param update_at the update_at to set
-     */
-    public void setUpdate_at(Timestamp update_at) {
-        this.Update_at = update_at;
-    }
+    
     
     public String getName() {
         return name;
@@ -161,14 +104,7 @@ public class User implements Serializable {
     public int IdEdit() {
         return this.Id;
     } 
-    /* public List<Video> getVideos() {
-        return videos;
-    }
-
-    public void setVideos(List<Video> videos) {
-        this.videos = videos;
-    }
-   */
+    
     public List ListItens() {
         SessionFactory sf =HibernateUtil.getSessionFactory();
         org.hibernate.Session session= sf.openSession();

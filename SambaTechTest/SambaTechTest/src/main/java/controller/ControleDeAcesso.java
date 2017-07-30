@@ -29,7 +29,7 @@ public class ControleDeAcesso implements Filter {
 
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-                if (session.getAttribute("USUARIOId") =="10001")
+                if (session.getAttribute("USUARIOId") =="10001" && (req.getRequestURI().endsWith("videos.faces")) )
                 {   
                                   //redireciona("/Logado.xhtml", response);
 
