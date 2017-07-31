@@ -40,16 +40,12 @@
                         <f:facet name="header">
                             <h:outputText value="Ações"/>
                         </f:facet>
-                        <p:commandButton value="Editar" image="ui-icon ui-icon-pencil"
+                        <p:commandButton value="Assitir via Amazon s3" image="ui-icon ui-icon-pencil"
                                 process="@this" >
                             <f:setPropertyActionListener target="#{mbVideo.video}"
                                 value="#{videos}"/>
                         </p:commandButton>
-                        <p:commandButton value="Remover" action="#{mbVideo.deleteUser}"
-                                image="ui-icon ui-icon-close" update="@form">
-                            <f:setPropertyActionListener target="#{mbVideo.limpVideo}"
-                                value="#{videos}"/>
-                        </p:commandButton>
+                       
                         
                     </p:column>
                     
