@@ -11,10 +11,14 @@ package controller;
  */
 
 
+import Util.CloudAmazonS3;
 import model.dao.HibernateDAO;
 import model.dao.InterfaceDAO;
 import model.User;
 import Util.FacesContextUtil;
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import java.io.File;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.List;
@@ -79,8 +83,13 @@ public class MbVideo implements Serializable  {
         try {
            InputStream is = file.getInputStream();
             //código usando Apache Commons IO
-            byte[] bytes = IOUtils.toByteArray(is);
-            video.setFile(bytes);
+            //byte[] bytes = IOUtils.toByteArray(is);
+            //video.setFile(bytes);
+            CloudAmazonS3 sup = new CloudAmazonS3();
+             ObjectMetadata m = new ObjectMetadata ();
+             m.addUserMetadata("filename", file.getName());
+             m.addUserMetadata("subname", file.getSubmittedFileName());
+            sup.submitFile(is,m);
             videoDAO().save(video);
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO, "Gravação efetuada com sucesso, este usuário já está apto a enviar videos!", ""));

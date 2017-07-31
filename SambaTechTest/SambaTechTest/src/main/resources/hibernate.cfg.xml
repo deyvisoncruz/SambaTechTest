@@ -7,7 +7,7 @@
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5433/SambaDB</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">minex</property>
-    <property name="hibernate.hbm2ddl.auto">create</property>
+    <property name="hibernate.hbm2ddl.auto">validate</property>
     <mapping class="model.dao.HibernateDAO"/>
     <mapping class="model.User"/>
     <mapping class="model.Video"/>
